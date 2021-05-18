@@ -1,5 +1,6 @@
 
 import sqlite3
+from utils import random_id
 
 conn = sqlite3.connect("arbre.db")
 
@@ -7,14 +8,47 @@ cursor = conn.cursor()
 
 
 def create_database() -> None:
-    command = "CREATE TABLE arbre (PRIMARY INT ID, name VARCHAR(120), photo VARCHAR(50), parent INT)"
+    command = "CREATE TABLE arbre (ID text, name VARCHAR(120), photo VARCHAR(50), parent text)"
     cursor.execute(command)  # execute table creation
     conn.commit()  # commit change to db
     return None
 
 
-def create_member(name: str, photo: str, parent: int) -> str:
-    command = "INSERT INTO arbre VALUES (?, ?, ?)"
-    cursor.execute(command, (name, photo, parent))  # create member
-    conn.commit()  # commit changes to db
-    return f"Created member {name} "
+def create_member(name: str, photo: str, parent: str) -> str:
+    command = "INSERT INTO arbre VALUES (?, ?, ?, ?)"
+    # create member
+    id = random_id()  # gen ID for the new member
+    cursor.execute(command, (id, name, photo, parent, ))
+    try:
+        conn.commit()  # commit changes to db
+        member = {
+            "id": id,
+            "name": name,
+            "photo": photo,
+            "parent": parent
+        }
+        return member
+    except:
+        return "Member creation failed"
+
+
+def get_member(id: str) -> dict:
+    command = "SELECT * from arbre WHERE ID=?"
+    result = cursor.execute(command, (id, )).fetchone()
+    member = {
+        "id": result[0],
+        "name": result[1],
+        "photo": result[2],
+        "parent": result[3]
+    }
+    return member
+
+
+def get_all_members():
+    command = "SELECT * from arbre"
+    members = cursor.execute(command).fetchall()
+
+    for member in range(0, len(members)):  # range(0, len(members))
+        members[member] = {"id": members[member][0],
+                           "name": members[member][1], "photo": members[member][2], "parent": members[member][3]}
+    return members
