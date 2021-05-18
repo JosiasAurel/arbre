@@ -1,12 +1,11 @@
 import React from "react";
 
-
-const Parent = (): JSX.Element => {
+const Index = () => {
     return (
         <div>
-
+            <h2>Hello</h2>
         </div>
     )
 }
 
-export default Parent;
+export default Index;

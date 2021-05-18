@@ -1,0 +1,26 @@
+{
+  "name": "arbre",
+  "version": "1.0.0",
+  "description": "Arbre",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev:client": "next ./client",
+    "dev:server": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosiasAurel/arbre-christ.git"
+  },
+  "keywords": [
+    "Arbre",
+    "children",
+    "parent"
+  ],
+  "author": "Josias Aurel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JosiasAurel/arbre-christ/issues"
+  },
+  "homepage": "https://github.com/JosiasAurel/arbre-christ#readme"
+}
