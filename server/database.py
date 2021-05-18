@@ -52,3 +52,10 @@ def get_all_members():
         members[member] = {"id": members[member][0],
                            "name": members[member][1], "photo": members[member][2], "parent": members[member][3]}
     return members
+
+
+def delete_member(id) -> str:
+    command = "DELETE FROM arbre WHERE ID=?"
+    cursor.execute(command, (id, ))
+    conn.commit()
+    return f"Deleted member with ID {id} "
