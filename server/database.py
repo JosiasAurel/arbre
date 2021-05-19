@@ -59,3 +59,14 @@ def delete_member(id) -> str:
     cursor.execute(command, (id, ))
     conn.commit()
     return f"Deleted member with ID {id} "
+
+
+def get_children_of(id: str) -> dict:
+    command = "SELECT * FROM arbre WHERE PARENT=?"
+    children = cursor.execute(command, (id, )).fetchall()
+
+    for child in range(0, len(children)):
+        children[child] = {"id": children[child][0],
+                           "name": children[child][1], "photo": children[child][2], "parent": children[child][3]}
+
+    return children
