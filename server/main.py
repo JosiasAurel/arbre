@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from .types import Member
 from .database import create_database, create_member, get_all_members, get_member
 
 app = FastAPI()
 
+app.mount("/images", StaticFiles(directory="images"), name="images")
 
 @app.get("/members")
 async def give_members():
