@@ -4,8 +4,6 @@ import MemberCard from "../components/MemberCard";
 
 import styles from "../styles/page.module.css";
 
-import { GetServerSideProps } from "next";
-
 interface IndexProps {
     data: Array
 }
@@ -19,7 +17,7 @@ const Index: FunctionComponent<IndexProps> = ({ data }): JSX.Element => {
                 {
                     data.map(member => {
                     return (
-                        <MemberCard id={member.id} name={member.name} photo={member.photo}  />
+                        <MemberCard id={member.id} name={member.name} photo={member.photo} goTo={`/${member.id}`}  />
                     )
                 })
                 }
