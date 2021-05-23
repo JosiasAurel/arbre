@@ -9,16 +9,17 @@ import { useRouter } from "next/router";
 interface MemberProps {
     name: string,
     photo: string,
-    childrenCount: number,
-    id: string
+    childrenCount?: number,
+    id: string,
+    goTo: string
 }
 
-const MemberCard: FunctionComponent<MemberProps> = ({ id, name, photo,  childrenCount }): JSX.Element => {
+const MemberCard: FunctionComponent<MemberProps> = ({ id, name, photo,  childrenCount, goTo }): JSX.Element => {
 
     const router = useRouter();
 
     function routeToMember(memberId: string) {
-        router.push(`/${memberId}`);
+        router.push(goTo);
     }
 
     return (
