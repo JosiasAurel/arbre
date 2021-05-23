@@ -70,3 +70,10 @@ def get_children_of(id: str) -> dict:
                            "name": children[child][1], "photo": children[child][2], "parent": children[child][3]}
 
     return children
+
+
+def update_member(id: str, name: str, photo: str, parent: str) -> str:
+    command = "UPDATE arbe SET ID = ?, name = ?, photo = ?, parent = ? WHERE ID = ?"
+    cursor.execute(command, (id, name, photo, parent, id))
+    conn.commit()
+    return f"Updated values for member with ID {id} "
