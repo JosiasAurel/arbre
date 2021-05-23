@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from apptypes import Member
-from database import create_database, create_member, get_all_members, get_member, get_children_of
+from database import create_database, create_member, get_all_members, get_member, get_children_of, update_member
 
 app = FastAPI()
 
@@ -24,3 +24,8 @@ async def throw_member(id: str):
 async def give_children_of(id: str):
     children = get_children_of(id)
     return children
+
+
+@app.post("/members/{id}")
+async def update_member_with_id(id: str):
+    return id
