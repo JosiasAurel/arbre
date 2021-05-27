@@ -24,7 +24,7 @@ const MemberCard: FunctionComponent<MemberProps> = ({ id, name, photo,  children
 
     return (
         <div onClick={() => routeToMember(id)} className={styles.memberCard}>
-            <Image src={`/images/${photo}`} name={name} loadingLazy={true} />
+            <Image src={`${photo}`} name={name} loadingLazy={true} />
             <h2> {name} </h2>
             {
                 childrenCount ? 

@@ -27,7 +27,7 @@ const ParentAndChildPage: FunctionComponent<ParentChildProps> = ({ memberData, c
                 </Link>
             </header>
             <div className={styles.parent}>
-                <MemberCard name={memberData.name} photo={memberData.photo} id={memberData.id}  />
+                <MemberCard name={memberData.name} photo={memberData.photo} id={memberData.id} goTo={undefined}  />
                 <ChildCount count={childrenData.length} />
             </div>
 
