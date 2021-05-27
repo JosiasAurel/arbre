@@ -3,8 +3,11 @@ from fastapi import FastAPI, File, UploadFile, Request
 from fastapi.staticfiles import StaticFiles
 from apptypes import Member
 from database import create_database, create_member, get_all_members, get_children_of, update_member, get_member
+import os
 
 app = FastAPI()
+
+BASE_DIR = os.getcwd()
 
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
@@ -34,10 +37,13 @@ async def create_member_(request: Request):
     # print(_member)
     img_type = _member["photoType"]
 
-    with open(f"{_member["name"]}.{img_type}", "wb") as img:
-        img.write(f"/images/{_member["photo"]}")
+    print(_member['photo'])
 
-    create_member(_member["name"], _member["parent"])
+    with open(f"{BASE_DIR}/images/{_member['name']}.{img_type}", "wb") as img:
+        img.write(_member['photo'])
+
+    create_member(_member["name"],
+                  f"{_member['name']}.{img_type}", _member["parent"])
     return "Member Created"
 
 

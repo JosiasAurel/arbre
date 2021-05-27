@@ -22,18 +22,20 @@ const CreateMemberHere: FunctionComponent = (): JSX.Element => {
         event.preventDefault();
         let photoFile = photoEl.files[0];
 
-        let imgBlog = new Blob([photoFile]);
+        let imgBlog = new Blob([photoFile], { type: photoFile.type });
 
-        const reader = new FileReader();
-        let resultB = reader.readAsArrayBuffer(imgBlog);
+        // const reader = new FileReader();
+        // let resultB = reader.readAsArrayBuffer(imgBlog);
         // console.log(resultB);
 
         const newUser = {
             name: name,
-            photo: imgBlog,
+            photo: imgBlog.arrayBuffer,
             parent: parent,
             photoType: photoEl.files[0].type.split("/")[1]
         }
+
+        console.log(newUser)
 
         fetch(`http://localhost:8000/create`, {
             method: "POST",
