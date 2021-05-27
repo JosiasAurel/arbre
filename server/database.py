@@ -62,14 +62,14 @@ def delete_member(id) -> str:
 
 
 def get_children_of(id: str) -> dict:
-    command = "SELECT * FROM arbre WHERE PARENT=?"
+    command = "SELECT * FROM arbre WHERE parent=?"
     children = cursor.execute(command, (id, )).fetchall()
-
+    children_ = []
     for child in range(0, len(children)):
-        children[child] = {"id": children[child][0],
-                           "name": children[child][1], "photo": children[child][2], "parent": children[child][3]}
+        children_.append({"id": children[child][0],
+                          "name": children[child][1], "photo": children[child][2], "parent": children[child][3]})
 
-    return children
+    return children_
 
 
 def update_member(id: str, name: str, photo: str, parent: str) -> str:
